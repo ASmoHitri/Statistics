@@ -6,7 +6,6 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 @Log
 @ApplicationScoped
@@ -17,6 +16,46 @@ public class StatisticsResource {
 
     @Inject
     private StatisticsBean statisticsBean;
+
+    @GET
+    @Path("usercount")
+    public Response getUserCount(){
+        int count = statisticsBean.getUserCount();
+        if (count==-1){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(count).build();
+    }
+
+    @GET
+    @Path("songcount")
+    public Response getSongCount(){
+        int count = statisticsBean.getSongCount();
+        if (count==-1){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(count).build();
+    }
+
+    @GET
+    @Path("songcountgenre/{genreId}")
+    public Response getSongCountbyGenre(@PathParam("genreId") int genreId){
+        int count = statisticsBean.getSongbyGenre(genreId);
+        if (count==-1){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(count).build();
+    }
+
+    @GET
+    @Path("songcountartist/{artistId}")
+    public Response getSongCountbyArtist(@PathParam("artistId") int artistId){
+        int count = statisticsBean.getSongbyGenre(artistId);
+        if (count==-1){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(count).build();
+    }
 
 
 }
