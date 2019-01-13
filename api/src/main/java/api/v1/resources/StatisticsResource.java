@@ -50,7 +50,7 @@ public class StatisticsResource {
     @GET
     @Path("songcountartist/{artistId}")
     public Response getSongCountbyArtist(@PathParam("artistId") int artistId){
-        int count = statisticsBean.getSongbyGenre(artistId);
+        int count = statisticsBean.getSongbyArtist(artistId);
         if (count==-1){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
