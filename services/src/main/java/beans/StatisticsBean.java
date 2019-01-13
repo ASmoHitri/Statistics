@@ -1,6 +1,7 @@
 package beans;
 
 import com.kumuluz.ee.discovery.annotations.DiscoverService;
+import dtos.Playlist;
 import dtos.Song;
 import dtos.User;
 
@@ -49,7 +50,7 @@ public class StatisticsBean {
     public int getSongCount() {
         if (basePathCatalogs.isPresent()) {
             try {
-                List<Song> songs = httpClient.target(basePathSubscriptions.get() + "/api/v1/songs")
+                List<Song> songs = httpClient.target(basePathCatalogs.get() + "/api/v1/songs")
                         .request().get(new GenericType<List<Song>>() {
                         });
                 return songs.size();
@@ -61,10 +62,10 @@ public class StatisticsBean {
         return -1;
     }
 
-    public int getSongbyGenre(int genreId){
+    public int getSongCountbyGenre(int genreId){
         if (basePathCatalogs.isPresent()) {
             try {
-                List<Song> songs = httpClient.target(basePathSubscriptions.get() + "/api/v1/songs?where=genre.id:EQ:" + genreId)
+                List<Song> songs = httpClient.target(basePathCatalogs.get() + "/api/v1/songs?where=genre.id:EQ:" + genreId)
                         .request().get(new GenericType<List<Song>>() {
                         });
                 return songs.size();
@@ -77,13 +78,44 @@ public class StatisticsBean {
 
     }
 
-    public int getSongbyArtist(int artistId){
+    public int getSongCountbyArtist(int artistId){
         if (basePathCatalogs.isPresent()) {
             try {
-                List<Song> songs = httpClient.target(basePathSubscriptions.get() + "/api/v1/songs?where=artist.id:EQ:" + artistId)
+                List<Song> songs = httpClient.target(basePathCatalogs.get() + "/api/v1/songs?where=artist.id:EQ:" + artistId)
                         .request().get(new GenericType<List<Song>>() {
                         });
                 return songs.size();
+            } catch (WebApplicationException | ProcessingException exception) {
+                System.out.println(exception.getMessage());
+                return -1;
+            }
+        }
+        return -1;
+
+    }
+
+    public int getPlaylistCount() {
+        if (basePathCatalogs.isPresent()) {
+            try {
+                List<Playlist> playlists = httpClient.target(basePathCatalogs.get() + "/api/v1/playlists")
+                        .request().get(new GenericType<List<Playlist>>() {
+                        });
+                return playlists.size();
+            } catch (WebApplicationException | ProcessingException exception) {
+                System.out.println(exception.getMessage());
+                return -1;
+            }
+        }
+        return -1;
+    }
+
+    public int getPlaylistCountbyUser(int userId){
+        if (basePathCatalogs.isPresent()) {
+            try {
+                List<Playlist> playlists = httpClient.target(basePathCatalogs.get() + "/api/v1/playlists?where=userId:EQ:" + userId)
+                        .request().get(new GenericType<List<Playlist>>() {
+                        });
+                return playlists.size();
             } catch (WebApplicationException | ProcessingException exception) {
                 System.out.println(exception.getMessage());
                 return -1;

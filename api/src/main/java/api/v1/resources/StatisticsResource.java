@@ -40,7 +40,7 @@ public class StatisticsResource {
     @GET
     @Path("songcountgenre/{genreId}")
     public Response getSongCountbyGenre(@PathParam("genreId") int genreId){
-        int count = statisticsBean.getSongbyGenre(genreId);
+        int count = statisticsBean.getSongCountbyGenre(genreId);
         if (count==-1){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -50,12 +50,31 @@ public class StatisticsResource {
     @GET
     @Path("songcountartist/{artistId}")
     public Response getSongCountbyArtist(@PathParam("artistId") int artistId){
-        int count = statisticsBean.getSongbyArtist(artistId);
+        int count = statisticsBean.getSongCountbyArtist(artistId);
         if (count==-1){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         return Response.ok(count).build();
     }
 
+    @GET
+    @Path("playlistcount")
+    public Response getPlaylistCount(){
+        int count = statisticsBean.getPlaylistCount();
+        if (count==-1){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(count).build();
+    }
+
+    @GET
+    @Path("playlistcountuser/{userId}")
+    public Response getPlaylistCountbyUser(@PathParam("userId") int userId){
+        int count = statisticsBean.getPlaylistCountbyUser(userId);
+        if (count==-1){
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(count).build();
+    }
 
 }
