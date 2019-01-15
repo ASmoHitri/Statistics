@@ -1,6 +1,8 @@
 package api.v1.resources;
 import beans.StatisticsBean;
 import com.kumuluz.ee.logs.cdi.Log;
+import dtos.Count;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -24,7 +26,7 @@ public class StatisticsResource {
         if (count==-1){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.ok(count).build();
+        return Response.ok(new Count(count)).build();
     }
 
     @GET
@@ -34,7 +36,7 @@ public class StatisticsResource {
         if (count==-1){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.ok(count).build();
+        return Response.ok(new Count(count)).build();
     }
 
     @GET
@@ -44,7 +46,7 @@ public class StatisticsResource {
         if (count==-1){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.ok(count).build();
+        return Response.ok(new Count(count)).build();
     }
 
     @GET
@@ -54,7 +56,7 @@ public class StatisticsResource {
         if (count==-1){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.ok(count).build();
+        return Response.ok(new Count(count)).build();
     }
 
     @GET
@@ -64,7 +66,7 @@ public class StatisticsResource {
         if (count==-1){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.ok(count).build();
+        return Response.ok(new Count(count)).build();
     }
 
     @GET
@@ -74,7 +76,7 @@ public class StatisticsResource {
         if (count==-1){
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.ok(count).build();
+        return Response.ok(new Count(count)).build();
     }
 
 }
